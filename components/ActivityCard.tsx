@@ -1,8 +1,9 @@
-import React from 'react'
-import { MapPin, Clock, TrendingUp, Calendar, Heart, Zap, CircleGauge } from 'lucide-react'
+import React, { useState } from 'react'
+import { MapPin, Clock, TrendingUp, Calendar, Heart, Zap, CircleGauge, Share2 } from 'lucide-react'
 import type { StravaActivity } from '@/types/strava'
 import { useTranslations } from 'next-intl'
 import { ActivityMap } from './ActivityMap'
+import { ActivityShare } from './ActivityShare'
 
 interface ActivityCardProps {
   activity: StravaActivity
@@ -11,6 +12,7 @@ interface ActivityCardProps {
 
 export function ActivityCard({ activity, onClick }: ActivityCardProps) {
   const t = useTranslations()
+  const [isShareOpen, setIsShareOpen] = useState(false)
 
   const formatDuration = (seconds: number) => {
     const hours = Math.floor(seconds / 3600)
@@ -55,6 +57,16 @@ export function ActivityCard({ activity, onClick }: ActivityCardProps) {
             </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{activity.name}</h3>
           </div>
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setIsShareOpen(true)
+            }}
+            className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+            title="分享活动"
+          >
+            <Share2 className="h-5 w-5" />
+          </button>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 mt-4">
@@ -133,6 +145,12 @@ export function ActivityCard({ activity, onClick }: ActivityCardProps) {
           )}
         </div>
       </div>
+
+      <ActivityShare
+        activity={activity}
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+      />
     </div>
   )
 }
