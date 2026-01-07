@@ -1,0 +1,19 @@
+services:
+  app:
+    container_name: strava-ride-insights-dev
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: deps
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - AUTH_STRAVA_ID=your_client_id
+      - AUTH_STRAVA_SECRET=your_client_secret
+      - NEXT_PUBLIC_BASE_URL=http://localhost:3000
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    command: npm run dev

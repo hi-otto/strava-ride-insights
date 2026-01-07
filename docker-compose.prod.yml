@@ -1,0 +1,11 @@
+services:
+  app:
+    image: ghcr.io/hi-otto/strava-ride-insights:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - AUTH_STRAVA_ID=your_client_id
+      - AUTH_STRAVA_SECRET=your_client_secret
+      - NEXT_PUBLIC_BASE_URL=http://localhost:3000
+    restart: always
