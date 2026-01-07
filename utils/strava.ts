@@ -133,6 +133,9 @@ export const getStravaStats = async (access_token: string, athleteId: number) =>
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
+    next: {
+      revalidate: 300, // 5 minutes cache
+    },
   })
 
   if (!response.ok) {
