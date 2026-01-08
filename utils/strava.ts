@@ -7,7 +7,11 @@ export const getStravaAuthUrl = async (callbackUrl?: string | null) => {
   if (callbackUrl) {
     params.set('callbackUrl', callbackUrl)
   }
-  const response = await fetch(`/api/strava/auth-url?${params.toString()}`)
+  const response = await fetch(`/api/strava/auth-url?${params.toString()}`, {
+    next: {
+      revalidate: 300, // 5 minutes cache
+    },
+  })
   const data = await response.json()
   return data.url
 }
@@ -86,6 +90,9 @@ export const getStravaActivities = async (
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
+    next: {
+      revalidate: 300, // 5 minutes cache
+    },
   })
 
   if (!response.ok) {
@@ -114,6 +121,9 @@ export const getStravaAthlete = async (access_token: string) => {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
+    next: {
+      revalidate: 300, // 5 minutes cache
+    },
   })
 
   if (!response.ok) {
@@ -132,6 +142,9 @@ export const getStravaStats = async (access_token: string, athleteId: number) =>
   const response = await fetch(`https://www.strava.com/api/v3/athletes/${athleteId}/stats`, {
     headers: {
       Authorization: `Bearer ${access_token}`,
+    },
+    next: {
+      revalidate: 300, // 5 minutes cache
     },
   })
 
