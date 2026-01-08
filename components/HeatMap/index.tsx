@@ -2,7 +2,14 @@ import { useMemo, useState } from 'react'
 import { CityRoadsMap } from '../CityRoadsMap'
 import { StravaActivity } from '@/types/strava'
 import groupPolyline from '@/utils/groupPolyline'
+import { Map as MapIcon, Layers } from 'lucide-react'
+import dynamic from 'next/dynamic'
 
+// Dynamic import for Leaflet map
+const StandardMap = dynamic(
+  () => import('../StandardMap').then((mod) => mod.StandardMap),
+  { ssr: false }
+)
 interface HeatMapProps {
   activities?: StravaActivity[]
 }
@@ -15,12 +22,15 @@ interface GridSize {
 const ALL_GRID_SIZES: GridSize[] = [
   { value: 50, label: '50km' },
   { value: 100, label: '100km' },
-  { value: 200, label: '200km' }
+  { value: 200, label: '200km' },
+  { value: 500, label: '500km' },
+  { value: 1000, label: '1000km' }
 ];
 
 export function HeatMap({ activities }: HeatMapProps) {
   const [selectedGroup, setSelectedGroup] = useState<number>(0);
   const [gridSize, setGridSize] = useState<number>(ALL_GRID_SIZES[0].value);
+  const [mapType, setMapType] = useState<'standard' | 'artistic'>('standard');
 
   const { groupedActivities, currentPolylines, startLatlng, currentStats, availableGridSizes } = useMemo(() => {
     if (!activities?.length) return {
@@ -119,11 +129,41 @@ export function HeatMap({ activities }: HeatMapProps) {
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transition-colors">
-      <div className="aspect-[1/1] md:aspect-[16/9]">
-        <CityRoadsMap
-          key={selectedGroup}
-          summaryPolylines={currentPolylines}
-        />
+      <div className="relative aspect-[1/1] md:aspect-[16/9]">
+        <div className="absolute top-4 right-4 z-[1001] bg-white/90 dark:bg-gray-800/90 p-1 rounded-lg shadow-lg backdrop-blur-sm flex gap-1">
+          <button
+            onClick={() => setMapType('standard')}
+            className={`p-2 rounded-md transition-colors ${mapType === 'standard'
+              ? 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400'
+              : 'text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700'
+              }`}
+            title="Standard Map"
+          >
+            <MapIcon size={20} />
+          </button>
+          <button
+            onClick={() => setMapType('artistic')}
+            className={`p-2 rounded-md transition-colors ${mapType === 'artistic'
+              ? 'bg-orange-100 text-orange-600 dark:bg-orange-900/30 dark:text-orange-400'
+              : 'text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700'
+              }`}
+            title="Artistic Map"
+          >
+            <Layers size={20} />
+          </button>
+        </div>
+
+        {mapType === 'standard' ? (
+          <StandardMap
+            key={selectedGroup}
+            summaryPolylines={currentPolylines}
+          />
+        ) : (
+          <CityRoadsMap
+            key={selectedGroup}
+            summaryPolylines={currentPolylines}
+          />
+        )}
       </div>
 
       <div className="px-6 py-4 border-t border-gray-100 dark:border-gray-700">
