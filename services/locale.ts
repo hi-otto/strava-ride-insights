@@ -21,12 +21,20 @@ export async function getUserLocale(): Promise<Locale> {
   }
 
   // Detect browser language from Accept-Language header
-  const acceptLanguage = (await headers()).get('accept-language') || ''
+  const acceptLanguage = (await headers()).get('accept-language')?.toLowerCase() || ''
 
   // Check if the browser language includes Chinese (zh, zh-CN, zh-TW, zh-HK, etc.)
-  const isChinese = /^zh|,\s*zh/.test(acceptLanguage.toLowerCase())
+  if (/^zh|,\s*zh/.test(acceptLanguage)) {
+    return 'zh'
+  }
 
-  return isChinese ? 'zh' : 'en'
+  // Check if the browser language includes Spanish (es, es-ES, es-MX, etc.)
+  if (/^es|,\s*es/.test(acceptLanguage)) {
+    return 'es'
+  }
+
+  // Default to English
+  return 'en'
 }
 
 export async function setUserLocale(locale: Locale) {

@@ -13,6 +13,7 @@ const LanguageSwitcher: React.FC = () => {
   const languages = [
     { code: 'en' as Locale, label: 'English' },
     { code: 'zh' as Locale, label: '中文' },
+    { code: 'es' as Locale, label: 'Español' },
   ]
 
   useEffect(() => {
@@ -49,11 +50,10 @@ const LanguageSwitcher: React.FC = () => {
                   setUserLocale(language.code)
                 })
               }}
-              className={`w-full text-left px-4 py-2 text-sm ${
-                language.code === locale
+              className={`w-full text-left px-4 py-2 text-sm ${language.code === locale
                   ? 'text-orange-500 bg-orange-50 dark:text-orange-400 dark:bg-orange-900/20'
                   : 'text-gray-700 dark:text-gray-300 hover:bg-orange-50 dark:hover:bg-orange-900/20 hover:text-orange-500 dark:hover:text-orange-400'
-              } transition-colors`}
+                } transition-colors`}
             >
               {language.label}
             </button>

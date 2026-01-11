@@ -1,0 +1,149 @@
+{
+    "app": {
+        "title": "Ride Insights"
+    },
+    "navigation": {
+        "home": "Inicio",
+        "activities": "Actividades",
+        "stats": "Estadísticas",
+        "logout": "Cerrar sesión"
+    },
+    "auth": {
+        "login": "Iniciar sesión con Strava",
+        "logout": "Cerrar sesión"
+    },
+    "login": {
+        "title": "Conectar cuenta de Strava",
+        "description": "Autoriza el acceso a tus datos de ciclismo de Strava y comienza a explorar tu trayectoria",
+        "connectButton": "Conectar Strava"
+    },
+    "home": {
+        "title": "Sigue tu trayectoria ciclista",
+        "subtitle": "Obtén información sobre tus datos de ciclismo y descubre nuevos logros",
+        "stats": {
+            "title": "Estadísticas",
+            "description": "Consulta estadísticas detalladas de tus salidas, incluyendo distancia total, desnivel, duración y otras métricas clave",
+            "trendAnalysis": "Análisis de tendencias",
+            "timeDistribution": "Distribución temporal"
+        },
+        "activities": {
+            "title": "Actividades",
+            "description": "Explora tu historial completo de ciclismo, incluyendo rutas",
+            "routeVisualization": "Visualización de rutas",
+            "activityDetails": "Detalles de actividad"
+        }
+    },
+    "stats": {
+        "title": "Estadísticas de ciclismo",
+        "total_distance": "Distancia total",
+        "total_elevation": "Desnivel total",
+        "total_time": "Tiempo total",
+        "total_power": "Potencia total",
+        "view_total": "Ver total",
+        "view_by_year": "Ver por año",
+        "year": "Año",
+        "hours": "horas",
+        "minutes": "minutos",
+        "miles": "millas",
+        "feet": "pies",
+        "watts": "vatios",
+        "meters": "metros",
+        "overview": {
+            "title": "Resumen de ciclismo",
+            "total_distance": "Distancia total",
+            "total_time": "Tiempo total",
+            "total_rides": "Total de salidas",
+            "times": "veces"
+        },
+        "best_records": {
+            "title": "Mejores registros",
+            "longest_ride": "Salida más larga",
+            "highest_elevation": "Mayor desnivel",
+            "fastest_speed": "Velocidad máxima"
+        },
+        "time_distribution": {
+            "title": "Distribución horaria",
+            "morning": "Mañana (5-11)",
+            "afternoon": "Tarde (11-17)",
+            "evening": "Atardecer (17-22)",
+            "night": "Noche (22-5)",
+            "percentage": "%"
+        },
+        "weekday_stats": {
+            "title": "Entre semana vs Fin de semana",
+            "weekday_rides": "Salidas entre semana",
+            "weekend_rides": "Salidas de fin de semana",
+            "times": "veces",
+            "average": "Promedio"
+        },
+        "records": {
+            "title": "Mejores registros",
+            "longestRide": "Salida más larga",
+            "highestClimb": "Mayor ascenso",
+            "feet": "pies"
+        },
+        "averages": {
+            "title": "Datos promedio",
+            "distance": "Distancia promedio"
+        },
+        "average": {
+            "title": "Promedios",
+            "average_distance": "Distancia promedio",
+            "fastest_speed": "Velocidad máxima",
+            "speed": "Velocidad promedio",
+            "miles": "mi",
+            "miles_per_hour": "km/h",
+            "power": "Potencia promedio"
+        },
+        "seasonal": {
+            "title": "Distribución estacional",
+            "spring": "Primavera",
+            "summer": "Verano",
+            "autumn": "Otoño",
+            "winter": "Invierno",
+            "rideCount": "Número de salidas",
+            "rides": "salidas",
+            "avgDistance": "Distancia promedio",
+            "totalDistance": "Distancia total"
+        },
+        "weekendComparison": {
+            "title": "Entre semana vs Fin de semana",
+            "weekday": "Salidas entre semana",
+            "weekend": "Salidas de fin de semana",
+            "rides": "salidas",
+            "average": "Promedio"
+        },
+        "yearSelector": {
+            "year": "Año"
+        }
+    },
+    "activities": {
+        "noActivities": "Sin actividades",
+        "loading": "Cargando...",
+        "loadMore": "Cargar más",
+        "card": {
+            "distance": "Distancia",
+            "duration": "Duración",
+            "elevation": "Desnivel",
+            "speed": "Velocidad promedio",
+            "heartRate": "Frecuencia cardíaca promedio",
+            "date": "Fecha",
+            "kilometers": "km",
+            "metersShort": "m",
+            "kmPerHour": "km/h",
+            "hoursShort": "h",
+            "minutesShort": "min",
+            "average_power": "Potencia promedio"
+        }
+    },
+    "common": {
+        "loading": "Cargando..."
+    },
+    "unit": {
+        "kilometer": "km",
+        "meter": "m",
+        "hour": "h",
+        "minute": "min",
+        "kmh": "km/h"
+    }
+}
