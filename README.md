@@ -45,7 +45,6 @@ npm install
    Create a `.env.local` file with:
 
    First, get your Strava API credentials from https://www.strava.com/settings/api:
-
    1. Log in to your Strava account
    2. Go to Settings > API
    3. Create an application to get your Client ID and Client Secret
