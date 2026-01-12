@@ -45,7 +45,6 @@ npm install
    创建 `.env.local` 文件并添加：
 
    首先，从 https://www.strava.com/settings/api 获取你的 Strava API 凭证：
-
    1. 登录你的 Strava 账号
    2. 进入 设置 > API
    3. 创建应用程序以获取 Client ID 和 Client Secret
