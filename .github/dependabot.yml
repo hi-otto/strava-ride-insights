@@ -8,7 +8,6 @@ updates:
       day: 'monday'
       time: '09:00'
       timezone: 'Europe/Madrid'
-    open-pull-requests-limit: 10
     labels:
       - 'dependencies'
       - 'npm'
