@@ -137,6 +137,7 @@ export const getStravaAthlete = async (access_token: string) => {
     id: data.id,
     name: `${data.firstname} ${data.lastname}`,
     image: data.profile,
+    created_at: data.created_at,
   }
 }
 

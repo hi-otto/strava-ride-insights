@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { OverallStats } from './OverallStats'
 import { TimeDistributionChart } from './TimeDistributionChart'
@@ -13,21 +13,48 @@ import {
 import { useTranslations } from 'next-intl'
 import { useStatsActivities } from '@/hooks/useStatsActivities'
 import { HeatMap } from '../HeatMap'
+import useSWR from 'swr'
 
-const YEARS_TO_SHOW = 5 // 控制显示最近几年的数据
+// Fetcher for SWR
+const fetcher = (url: string) => fetch(url).then(res => res.json())
 
 export function StatsContainer() {
   const t = useTranslations()
   const now = new Date()
   const currentYear = now.getFullYear()
-  // 如果是1月份的前7天，默认显示上一年的数据
-  const defaultYear = now.getMonth() === 0 && now.getDate() <= 7 ? currentYear - 1 : currentYear
-  const [selectedYear, setSelectedYear] = useState<number>(defaultYear)
-  const { activities, isLoading, error } = useStatsActivities(selectedYear)
+
+  // Fetch user data to get creation date
+  const { data: userData } = useSWR('/api/strava/user', fetcher)
+
+  const [selectedYear, setSelectedYear] = useState<number>(currentYear)
 
   const years = useMemo(() => {
-    return Array.from({ length: YEARS_TO_SHOW }, (_, i) => currentYear - i)
-  }, [currentYear])
+    if (!userData?.user?.created_at) {
+      return [currentYear, 0] // Default fallback
+    }
+
+    const createdDate = new Date(userData.user.created_at)
+    const startYear = createdDate.getFullYear()
+    const yearList: number[] = []
+
+    // Generate years from current back to start year
+    for (let year = currentYear; year >= startYear; year--) {
+      yearList.push(year)
+    }
+
+    // Add "Total" (0) at the beginning (logically "after" the latest year)
+    return [0, ...yearList]
+  }, [currentYear, userData])
+
+  // Set default year logic once years are loaded
+  useEffect(() => {
+    const isJanuaryFirstWeek = now.getMonth() === 0 && now.getDate() <= 7
+    if (isJanuaryFirstWeek && years.includes(currentYear - 1)) {
+      setSelectedYear(currentYear - 1)
+    }
+  }, [years, currentYear])
+
+  const { activities, isLoading, error } = useStatsActivities(selectedYear)
 
   const stats = useMemo(() => calculateRideStats(activities || []), [activities])
   const timeDistribution = useMemo(() => calculateTimeDistribution(activities || []), [activities])
@@ -60,7 +87,7 @@ export function StatsContainer() {
             <ChevronLeft className="w-4 h-4 text-gray-500 dark:text-gray-400" />
           </button>
           <span className="font-medium text-gray-700 dark:text-gray-300 min-w-[4rem] text-center">
-            {selectedYear}
+            {selectedYear === 0 ? t('stats.view_total') : selectedYear}
             {isLoading && (
               <span className="ml-2 inline-block animate-spin rounded-full h-3 w-3 border-b-2 border-orange-500" />
             )}

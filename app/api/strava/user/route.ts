@@ -27,6 +27,7 @@ export async function GET() {
         id: userData.id,
         name: `${userData.firstname} ${userData.lastname}`,
         image: userData.profile,
+        created_at: userData.created_at,
       },
     })
   } catch (error) {

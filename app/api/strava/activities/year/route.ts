@@ -18,8 +18,17 @@ export async function GET(request: Request) {
       return NextResponse.json({ error: 'Year parameter is required' }, { status: 400 })
     }
 
-    const startOfYear = new Date(parseInt(year), 0, 1).getTime() / 1000
-    const endOfYear = new Date(parseInt(year) + 1, 0, 1).getTime() / 1000
+    let startOfYear: number
+    let endOfYear: number
+
+    // year=0 表示获取所有数据
+    if (year === '0') {
+      startOfYear = 0
+      endOfYear = Math.floor(Date.now() / 1000)
+    } else {
+      startOfYear = new Date(parseInt(year), 0, 1).getTime() / 1000
+      endOfYear = new Date(parseInt(year) + 1, 0, 1).getTime() / 1000
+    }
 
     let page = 1
     const per_page = 100

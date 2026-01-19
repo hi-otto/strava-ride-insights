@@ -22,12 +22,16 @@ export function useStatsActivities(year?: number) {
     data: activities,
     error,
     isLoading,
-  } = useSWR<StravaActivity[]>(year ? `/api/strava/activities/year?year=${year}` : null, fetcher, {
-    revalidateIfStale: isCurrentYear,
-    revalidateOnFocus: isCurrentYear,
-    revalidateOnReconnect: false,
-    dedupingInterval: isCurrentYear ? 5 * 60 * 1000 : 30 * 60 * 1000, // 5分钟（当前年）或30分钟（历史年份）
-  })
+  } = useSWR<StravaActivity[]>(
+    year !== undefined ? `/api/strava/activities/year?year=${year}` : null,
+    fetcher,
+    {
+      revalidateIfStale: isCurrentYear,
+      revalidateOnFocus: isCurrentYear,
+      revalidateOnReconnect: false,
+      dedupingInterval: isCurrentYear ? 5 * 60 * 1000 : 30 * 60 * 1000, // 5分钟（当前年）或30分钟（历史年份）
+    }
+  )
 
   return {
     activities: activities || [],
