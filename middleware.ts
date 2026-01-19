@@ -55,5 +55,5 @@ export async function middleware(request: NextRequest) {
 
 // 配置需要中间件处理的路由
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$|.*\\.svg|.*\\.ico).*)'],
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$|.*\\.svg|.*\\.ico|manifest\\.json$|sw\\.js$|workbox-.*\\.js$).*)'],
 }

@@ -9,6 +9,12 @@ import './globals.css'
 export const metadata: Metadata = {
   title: 'RideVista',
   description: 'Your Personal Cycling Dashboard connecting with Strava',
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'RideVista',
+  },
 }
 
 export default async function RootLayout({
