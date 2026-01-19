@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { CityRoadsMap } from '../CityRoadsMap'
 import { StravaActivity } from '@/types/strava'
 import groupPolyline from '@/utils/groupPolyline'
@@ -28,8 +28,12 @@ const ALL_GRID_SIZES: GridSize[] = [
 
 export function HeatMap({ activities }: HeatMapProps) {
   const [selectedGroup, setSelectedGroup] = useState<number>(0)
-  const [gridSize, setGridSize] = useState<number>(ALL_GRID_SIZES[0].value)
+  const [gridSize, setGridSize] = useState<number>(200)
   const [mapType, setMapType] = useState<'standard' | 'artistic'>('standard')
+
+  useEffect(() => {
+    setSelectedGroup(0)
+  }, [gridSize])
 
   const { groupedActivities, currentPolylines, startLatlng, currentStats, availableGridSizes } =
     useMemo(() => {
@@ -50,8 +54,7 @@ export function HeatMap({ activities }: HeatMapProps) {
           },
         }
 
-      // Calculate available grid sizes and their groups
-      const availableSizes: GridSize[] = []
+      // Calculate groups for all grid sizes
       const allSizeGroups = new Map()
 
       for (const size of ALL_GRID_SIZES) {
@@ -67,36 +70,30 @@ export function HeatMap({ activities }: HeatMapProps) {
           .sort((a, b) => b.activities.length - a.activities.length)
 
         allSizeGroups.set(size.value, groups)
-
-        // Always include sizes until we hit the second single group
-        if (
-          availableSizes.length === 0 || // always include first size
-          groups.length > 1 || // include sizes with multiple groups
-          (groups.length === 1 &&
-            !availableSizes.some(s => allSizeGroups.get(s.value).length === 1))
-        ) {
-          // include first single group
-          availableSizes.push(size)
-        } else {
-          break // Stop after we hit a second single group
-        }
-      }
-
-      // If current grid size is not available, use the first available size
-      if (!availableSizes.find(size => size.value === gridSize)) {
-        setGridSize(availableSizes[0].value)
       }
 
       // Get groups for current grid size
       const groups = allSizeGroups.get(gridSize) || []
 
       // Reset selected group if it's out of bounds
-      if (selectedGroup >= groups.length) {
-        setSelectedGroup(0)
-      }
+      // logic handles if current group index is invalid for new size
+      // We do NOT reset to 0 automatically inside render if prompt updates,
+      // but here we are computing derived state.
+      // If the user switches size, we might want to stay on group 0 or try to track.
+      // The original code did: if (selectedGroup >= groups.length) setSelectedGroup(0)
+      // We can't call setState inside useMemo.
+      // We will handle the "safety check" by essentially returning group 0 if out of bounds?
+      // No, the original code called setSelectedGroup(0) which triggers re-render.
+      // That is bad practice in useMemo but worked because of React batching or suppression?
+      // Actually original code:
+      // if (selectedGroup >= groups.length) { setSelectedGroup(0) }
+      // This is a side effect in useMemo! Warning.
+
+      // Better: derive effectiveSelectedGroup
+      const effectiveSelectedGroup = selectedGroup >= groups.length ? 0 : selectedGroup
 
       // Get current group's polylines
-      const currentGroup = groups[selectedGroup] || { activities: [], polylines: [] }
+      const currentGroup = groups[effectiveSelectedGroup] || { activities: [], polylines: [] }
 
       // Get start location
       const startLocation = currentGroup.activities[0]?.start_latlng || activities[0].start_latlng
@@ -140,7 +137,7 @@ export function HeatMap({ activities }: HeatMapProps) {
         currentPolylines: currentGroup.polylines,
         startLatlng: startLocation,
         currentStats: stats,
-        availableGridSizes: availableSizes,
+        availableGridSizes: ALL_GRID_SIZES,
       }
     }, [activities, selectedGroup, gridSize])
 
