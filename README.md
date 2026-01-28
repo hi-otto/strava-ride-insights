@@ -35,27 +35,27 @@ git clone https://github.com/hi-otto/strava-ride-insights.git
 cd strava-ride-insights
 ```
 
-2. Install dependencies:
+1. Install dependencies:
 
 ```bash
 npm install
 ```
 
-3. Set up environment variables:
+1. Set up environment variables:
    Create a `.env.local` file with:
 
-   First, get your Strava API credentials from https://www.strava.com/settings/api:
+   First, get your Strava API credentials from <https://www.strava.com/settings/api>:
    1. Log in to your Strava account
    2. Go to Settings > API
    3. Create an application to get your Client ID and Client Secret
 
-```
+```bash
 AUTH_STRAVA_ID=your_client_id
 AUTH_STRAVA_SECRET=your_client_secret
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
 
-4. Run the development server:
+1. Run the development server:
 
 ```bash
 npm run dev
