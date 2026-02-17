@@ -8,10 +8,8 @@ const fetcher = async (url: string) => {
     throw new Error(response.status === 401 ? 'Session expired' : 'Failed to fetch')
   }
   const data = await response.json()
-  // 只返回骑行活动
-  return data.filter((activity: StravaActivity) =>
-    activity.sport_type.toLowerCase().includes('ride')
-  )
+  // Return all activities
+  return data
 }
 
 export function useStatsActivities(year?: number) {

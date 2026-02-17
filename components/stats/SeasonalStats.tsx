@@ -71,7 +71,7 @@ export function SeasonalStats({ stats }: SeasonalStatsProps) {
               <div>
                 <div className="flex justify-between text-sm mb-1">
                   <span className="text-gray-500 dark:text-gray-400">
-                    {t('stats.seasonal.rideCount')}
+                    {t('stats.seasonal.activityCount')}
                   </span>
                   <span className="font-medium text-gray-700 dark:text-gray-200">
                     {data.totalRides}

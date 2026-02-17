@@ -29,7 +29,7 @@ export function WeekendStats({ stats }: WeekendStatsProps) {
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-gray-600 dark:text-gray-300">
-              {t('stats.weekday_stats.weekday_rides')}
+              {t('stats.weekday_stats.weekday_activities')}
             </span>
             <span className="font-medium text-indigo-700 dark:text-indigo-300">
               {stats.weekday.totalRides}
@@ -50,7 +50,7 @@ export function WeekendStats({ stats }: WeekendStatsProps) {
         <div className="space-y-2">
           <div className="flex justify-between text-sm">
             <span className="text-gray-600 dark:text-gray-300">
-              {t('stats.weekday_stats.weekend_rides')}
+              {t('stats.weekday_stats.weekend_activities')}
             </span>
             <span className="font-medium text-indigo-700 dark:text-indigo-300">
               {stats.weekend.totalRides}

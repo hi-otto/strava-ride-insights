@@ -45,7 +45,7 @@ export function OverallStats({ stats }: OverallStatsProps) {
           </div>
           <div className="group transition-all duration-300">
             <p className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-orange-600 dark:group-hover:text-orange-300">
-              {t('stats.overview.total_rides')}
+              {t('stats.overview.total_activities')}
             </p>
             <p className="text-2xl font-bold text-orange-700 dark:text-orange-300 group-hover:scale-105 transition-transform">
               {stats.totalRides} {t('stats.overview.times')}
@@ -67,7 +67,7 @@ export function OverallStats({ stats }: OverallStatsProps) {
         <div className="space-y-4">
           <div className="group transition-all duration-300">
             <p className="text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-300">
-              {t('stats.best_records.longest_ride')}
+              {t('stats.best_records.longest_activity')}
             </p>
             <p className="text-2xl font-bold text-blue-700 dark:text-blue-300 group-hover:scale-105 transition-transform">
               <Distance value={stats.longestRide.distance} />
