@@ -161,7 +161,6 @@ export function ActivityShare({ activity, isOpen, onClose }: ActivityShareProps)
     try {
       // 获取元素的实际尺寸
       const rect = shareRef.current.getBoundingClientRect()
-      console.log('Element dimensions:', rect.width, rect.height)
 
       const canvas = await html2canvas(shareRef.current, {
         backgroundColor: null, // 透明背景
@@ -176,8 +175,6 @@ export function ActivityShare({ activity, isOpen, onClose }: ActivityShareProps)
         height: Math.max(rect.height, 500),
         width: rect.width,
       })
-
-      console.log('Canvas dimensions:', canvas.width, canvas.height)
 
       const link = document.createElement('a')
       link.download = `strava-share-${activity.name.replace(/[^a-z0-9]/gi, '_').toLowerCase()}.png`

@@ -162,7 +162,6 @@ async function deleteOldDB(): Promise<void> {
     await new Promise<void>((resolve, reject) => {
       const request = indexedDB.deleteDatabase('road_network_cache')
       request.onsuccess = () => {
-        console.log('成功删除旧版本数据库')
         resolve()
       }
       request.onerror = () => reject(request.error)
@@ -183,14 +182,12 @@ export async function fetchRoadNetwork(bounds: Bounds) {
     // 尝试从缓存获取数据
     const cachedData = await findCachedData(normalizedBounds)
     if (cachedData) {
-      console.log('Cache hit!')
       return processRoadNetwork(cachedData.data)
     }
   } catch (error) {
     console.warn('Failed to read from cache:', error)
   }
 
-  console.log('Cache miss, fetching from API...')
   const query = `
     [out:json][timeout:25];
     (

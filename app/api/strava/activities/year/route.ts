@@ -66,7 +66,6 @@ export async function GET(request: Request) {
     // If it's a past year and we have data, return it! (Offline first / Fast load)
     // We assume past years don't change often.
     if (year !== currentYear && year !== '0' && cachedActivities.length > 0) {
-      console.log(`Returning ${cachedActivities.length} activities from cache for ${year}`)
       return NextResponse.json(cachedActivities)
     }
 
