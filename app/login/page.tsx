@@ -22,7 +22,7 @@ export default function Login() {
       const res = await fetch('/api/strava/setup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ clientId, clientSecret, callbackUrl: callbackUrl || '/' })
+        body: JSON.stringify({ clientId, clientSecret, callbackUrl: callbackUrl || '/' }),
       })
 
       const data = await res.json()
@@ -71,7 +71,7 @@ export default function Login() {
                 type="text"
                 value={clientId}
                 placeholder={t('login.savedPlaceholder')}
-                onChange={(e) => setClientId(e.target.value)}
+                onChange={e => setClientId(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 outline-none placeholder:italic"
               />
             </div>
@@ -84,14 +84,12 @@ export default function Login() {
                 type="password"
                 value={clientSecret}
                 placeholder={t('login.savedPlaceholder')}
-                onChange={(e) => setClientSecret(e.target.value)}
+                onChange={e => setClientSecret(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-orange-500 outline-none placeholder:italic"
               />
             </div>
 
-            {error && (
-              <div className="text-red-500 text-sm">{error}</div>
-            )}
+            {error && <div className="text-red-500 text-sm">{error}</div>}
 
             <button
               type="submit"
