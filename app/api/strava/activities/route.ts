@@ -1,10 +1,13 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
 import { getStravaActivities } from '@/utils/strava'
+import { archiveActivities } from '@/services/activityCache'
 
 export async function GET(request: Request) {
   const cookieStore = await cookies()
   const accessToken = cookieStore.get('strava_access_token')
+  const refreshToken = cookieStore.get('strava_refresh_token')
+  const athleteId = cookieStore.get('strava_athlete_id')
 
   if (!accessToken) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
@@ -20,6 +23,14 @@ export async function GET(request: Request) {
     }
 
     const activities = await getStravaActivities(accessToken.value, params)
+
+    // Background archiving
+    if (athleteId && refreshToken && Array.isArray(activities)) {
+      archiveActivities(parseInt(athleteId.value), activities, refreshToken.value).catch(err => {
+        console.error('Failed to archive activities:', err)
+      })
+    }
+
     return NextResponse.json(activities)
   } catch (error) {
     console.error('Error fetching activities:', error)

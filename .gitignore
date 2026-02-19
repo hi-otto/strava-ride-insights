@@ -44,3 +44,6 @@ next-env.d.ts
 .idea
 mockData
 app/example
+
+# data
+/data

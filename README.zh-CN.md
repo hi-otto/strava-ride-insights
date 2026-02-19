@@ -19,8 +19,13 @@
 - 🌍 国际化支持（英文/中文/西班牙语）
 - 📱 PWA 支持（可安装应用）
 - ⚡ 智能缓存系统
-  - Next.js 服务器端缓存（5分钟重新验证）
-  - SWR 客户端缓存，避免触及 Strava API 速率限制
+  1. **基于文件的归档（加密）**:
+     - 超过 1 周的活动会被加密并存储在本地。
+     - 往年数据直接从缓存加载，无需请求 API（离线优先）。
+     - 当年数据从缓存加载 + 仅获取新活动。
+  2. **API 响应缓存**:
+     - 使用 Next.js `fetch` 进行短期缓存（5分钟）。
+     - 防止频繁刷新触发速率限制。
 
 ## 技术栈
 
@@ -58,6 +63,15 @@ cd strava-ride-insights
 1. 配置环境变量：
    打开 `docker-compose.prod.yml`. 你不在需要配置 Strava 凭证了。它们将在 UI 中配置。
 
+   **重要**: 你必须生成一个安全的 `APP_SECRET` 用于加密凭证。
+   运行以下命令生成：
+
+   ```bash
+   openssl rand -hex 32
+   ```
+
+   然后将其填入 `docker-compose.prod.yml`.
+
 2. 运行应用：
 
 ```bash
@@ -77,7 +91,10 @@ npm install
 
 ```bash
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
+APP_SECRET=your_generated_secret_key
 ```
+
+使用 `openssl rand -hex 32` 生成 `APP_SECRET`。
 
 注意：Strava Client ID 和 Secret 现在通过登录页面的 UI 进行配置。
 

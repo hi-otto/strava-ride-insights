@@ -9,7 +9,9 @@ services:
       - '3000:3000'
     environment:
       - NODE_ENV=development
+      - NODE_ENV=development
       - TZ=Europe/Madrid
+      - APP_SECRET=replace_with_secure_random_string_at_least_32_chars
     volumes:
       - .:/app
       - /app/node_modules

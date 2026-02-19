@@ -69,6 +69,16 @@ export async function GET(request: Request) {
       })
     }
 
+    // Store athlete ID if available
+    if (tokens.athlete?.id) {
+      cs.set('strava_athlete_id', tokens.athlete.id.toString(), {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        expires: new Date(tokens.expires_at * 1000),
+      })
+    }
+
     return NextResponse.redirect(new URL(callbackUrl, process.env.NEXT_PUBLIC_BASE_URL))
   } catch (error) {
     console.error('Error exchanging token:', error)

@@ -7,5 +7,7 @@ services:
     environment:
       - NODE_ENV=production
       - NEXT_PUBLIC_BASE_URL=http://localhost:3000
+      - NEXT_PUBLIC_BASE_URL=http://localhost:3000
       - TZ=Europe/Madrid
+      - APP_SECRET=replace_with_secure_random_string_at_least_32_chars
     restart: always

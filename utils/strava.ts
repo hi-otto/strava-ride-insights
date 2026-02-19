@@ -20,6 +20,12 @@ export interface StravaTokens {
   access_token: string
   refresh_token: string
   expires_at: number
+  athlete?: {
+    id: number
+    username: string
+    firstname: string
+    lastname: string
+  }
 }
 
 export const exchangeToken = async (
@@ -129,6 +135,7 @@ export const getStravaActivities = async (
   }
 
   const data = await response.json()
+
   return data
 }
 

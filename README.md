@@ -19,8 +19,13 @@ English | [简体中文](./README.zh-CN.md)
 - i18n Support (English/Chinese/Spanish)
 - PWA Support (Installable App)
 - Smart Caching System
-  - Server-side caching with Next.js (5-minute revalidation)
-  - Client-side caching with SWR to avoid Strava API rate limits
+  1. **File-Based Archive (Encrypted)**:
+     - Activities older than 1 week are encrypted and stored locally.
+     - Past years load instantly from this cache (Offline-first).
+     - Current year loads from cache + fetches only new activities.
+  2. **API Response Caching**:
+     - Short-term caching (5 minutes) using Next.js `fetch` cache.
+     - Prevents hitting rate limits during frequent reloads.
 
 ## Tech Stack
 
@@ -58,6 +63,15 @@ cd strava-ride-insights
 1. Configure environment variables:
    Open `docker-compose.prod.yml`. You don't need to set Strava credentials here anymore. They will be configured in the UI.
 
+   **Important**: You must generate a secure `APP_SECRET` for encrypting credentials.
+   Run the following command to generate one:
+
+   ```bash
+   openssl rand -hex 32
+   ```
+
+   Then paste it into `docker-compose.prod.yml`.
+
 2. Run the application:
 
 ```bash
@@ -77,7 +91,10 @@ npm install
 
 ```bash
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
+APP_SECRET=your_generated_secret_key
 ```
+
+Generate `APP_SECRET` with: `openssl rand -hex 32`
 
 Note: Strava Client ID and Secret are now configured via the UI on the login page.
 
