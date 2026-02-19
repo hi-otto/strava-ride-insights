@@ -15,7 +15,14 @@
   "login": {
     "title": "Connect Strava Account",
     "description": "Authorize access to your Strava cycling data and start exploring your riding journey",
-    "connectButton": "Connect Strava"
+    "connectButton": "Connect Strava",
+    "instruction": "To connect, you need to provide your own Strava API credentials.",
+    "leaveEmpty": "Leave empty to use previously saved credentials.",
+    "createLink": "Create or view your API Application here",
+    "clientId": "Client ID",
+    "clientSecret": "Client Secret",
+    "savedPlaceholder": "Saved...",
+    "connecting": "Connecting..."
   },
   "home": {
     "title": "Track Your Cycling Journey",

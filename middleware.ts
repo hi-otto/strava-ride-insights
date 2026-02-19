@@ -27,7 +27,24 @@ export async function middleware(request: NextRequest) {
   const response = NextResponse.next()
 
   try {
-    const tokens = await refreshStravaToken(refreshToken.value)
+    const appCredsCookie = request.cookies.get('strava_app_creds')
+    let clientId, clientSecret
+
+    if (appCredsCookie) {
+      try {
+        // NOTE: decrypt might not work if edge runtime doesn't support the specific crypto method
+        // But usually newer Next.js supports it
+        const { decrypt } = await import('./lib/crypto')
+        const decrypted = await decrypt(appCredsCookie.value)
+        const creds = JSON.parse(decrypted)
+        clientId = creds.clientId
+        clientSecret = creds.clientSecret
+      } catch (e) {
+        console.error('Failed to decrypt creds in middleware', e)
+      }
+    }
+
+    const tokens = await refreshStravaToken(refreshToken.value, clientId, clientSecret)
 
     // 更新cookies中的tokens
     response.cookies.set('strava_access_token', tokens.access_token, {

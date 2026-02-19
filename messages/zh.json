@@ -15,7 +15,14 @@
   "login": {
     "title": "连接 Strava 账号",
     "description": "授权访问您的 Strava 骑行数据，开始探索您的骑行旅程",
-    "connectButton": "连接 Strava"
+    "connectButton": "连接 Strava",
+    "instruction": "要连接，您需要提供您自己的 Strava API 凭据。",
+    "leaveEmpty": "留空以使用之前保存的凭据。",
+    "createLink": "在此处创建或查看您的 API 应用程序",
+    "clientId": "客户 ID",
+    "clientSecret": "客户密钥",
+    "savedPlaceholder": "已保存...",
+    "connecting": "连接中..."
   },
   "home": {
     "title": "追踪您的骑行旅程",

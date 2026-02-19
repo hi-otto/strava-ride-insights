@@ -22,15 +22,22 @@ export interface StravaTokens {
   expires_at: number
 }
 
-export const exchangeToken = async (code: string): Promise<StravaTokens> => {
+export const exchangeToken = async (
+  code: string,
+  clientId?: string,
+  clientSecret?: string
+): Promise<StravaTokens> => {
+  const finalClientId = clientId || process.env.AUTH_STRAVA_ID
+  const finalClientSecret = clientSecret || process.env.AUTH_STRAVA_SECRET
+
   const response = await fetch('https://www.strava.com/oauth/token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      client_id: STRAVA_CLIENT_ID,
-      client_secret: STRAVA_CLIENT_SECRET,
+      client_id: finalClientId,
+      client_secret: finalClientSecret,
       code,
       grant_type: 'authorization_code',
     }),
@@ -43,15 +50,22 @@ export const exchangeToken = async (code: string): Promise<StravaTokens> => {
   return response.json()
 }
 
-export const refreshStravaToken = async (refresh_token: string): Promise<StravaTokens> => {
+export const refreshStravaToken = async (
+  refresh_token: string,
+  clientId?: string,
+  clientSecret?: string
+): Promise<StravaTokens> => {
+  const finalClientId = clientId || process.env.AUTH_STRAVA_ID
+  const finalClientSecret = clientSecret || process.env.AUTH_STRAVA_SECRET
+
   const response = await fetch('https://www.strava.com/oauth/token', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      client_id: STRAVA_CLIENT_ID,
-      client_secret: STRAVA_CLIENT_SECRET,
+      client_id: finalClientId,
+      client_secret: finalClientSecret,
       refresh_token,
       grant_type: 'refresh_token',
     }),

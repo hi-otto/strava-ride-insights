@@ -56,9 +56,7 @@ cd strava-ride-insights
 ### Docker（生产环境）
 
 1. 配置环境变量：
-   打开 `docker-compose.prod.yml` 并替换以下值为你的 Strava API 凭证：
-   - `AUTH_STRAVA_ID`（你的 Client ID）
-   - `AUTH_STRAVA_SECRET`（你的 Client Secret）
+   打开 `docker-compose.prod.yml`. 你不在需要配置 Strava 凭证了。它们将在 UI 中配置。
 
 2. 运行应用：
 
@@ -78,10 +76,10 @@ npm install
    创建 `.env.local` 文件并添加你的 Strava API 凭证：
 
 ```bash
-AUTH_STRAVA_ID=your_client_id
-AUTH_STRAVA_SECRET=your_client_secret
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
+
+注意：Strava Client ID 和 Secret 现在通过登录页面的 UI 进行配置。
 
 1. 运行开发服务器：
 

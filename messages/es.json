@@ -15,7 +15,14 @@
   "login": {
     "title": "Conectar cuenta de Strava",
     "description": "Autoriza el acceso a tus datos de actividad de Strava y comienza a explorar tu trayectoria",
-    "connectButton": "Conectar Strava"
+    "connectButton": "Conectar Strava",
+    "instruction": "Para conectar, necesitas proporcionar tus credenciales de API de Strava.",
+    "leaveEmpty": "Deja en blanco para usar credenciales guardadas anteriormente.",
+    "createLink": "Crea o ver tu aplicación API aquí",
+    "clientId": "ID de cliente",
+    "clientSecret": "Secreto de cliente",
+    "savedPlaceholder": "Guardado...",
+    "connecting": "Conectando..."
   },
   "home": {
     "title": "Sigue tu trayectoria deportiva",

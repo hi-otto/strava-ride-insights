@@ -56,9 +56,7 @@ cd strava-ride-insights
 ### Docker (Production)
 
 1. Configure environment variables:
-   Open `docker-compose.prod.yml` and replace the following values with your Strava API credentials:
-   - `AUTH_STRAVA_ID` (your Client ID)
-   - `AUTH_STRAVA_SECRET` (your Client Secret)
+   Open `docker-compose.prod.yml`. You don't need to set Strava credentials here anymore. They will be configured in the UI.
 
 2. Run the application:
 
@@ -78,10 +76,10 @@ npm install
    Create a `.env.local` file with your Strava API credentials:
 
 ```bash
-AUTH_STRAVA_ID=your_client_id
-AUTH_STRAVA_SECRET=your_client_secret
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ```
+
+Note: Strava Client ID and Secret are now configured via the UI on the login page.
 
 1. Run the development server:
 
