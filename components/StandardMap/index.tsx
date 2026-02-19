@@ -44,16 +44,29 @@ export function StandardMap({ summaryPolyline, summaryPolylines }: StandardMapPr
   const bounds = useMemo(() => {
     if (decodedPolylines.length === 0) return null
 
-    // Calculate bounds from all points
+    // Calculate bounds from all points safely avoiding stack overflow
     const allPoints = decodedPolylines.flat()
     if (allPoints.length === 0) return null
 
-    const lats = allPoints.map(p => p[0])
-    const lngs = allPoints.map(p => p[1])
+    // Use a loop or reduce to find min/max to avoid "Maximum call stack size exceeded"
+    // when spreading large arrays into Math.min/Math.max
+    let minLat = Infinity
+    let maxLat = -Infinity
+    let minLng = Infinity
+    let maxLng = -Infinity
+
+    for (const p of allPoints) {
+      const lat = p[0]
+      const lng = p[1]
+      if (lat < minLat) minLat = lat
+      if (lat > maxLat) maxLat = lat
+      if (lng < minLng) minLng = lng
+      if (lng > maxLng) maxLng = lng
+    }
 
     return [
-      [Math.min(...lats), Math.min(...lngs)],
-      [Math.max(...lats), Math.max(...lngs)],
+      [minLat, minLng],
+      [maxLat, maxLng],
     ]
   }, [decodedPolylines])
 

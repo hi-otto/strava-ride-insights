@@ -121,9 +121,9 @@ describe('calculateStats', () => {
     expect(result.total_time).toBe(0)
     expect(result.total_elevation_gain).toBe(0)
     expect(result.total_activities).toBe(0)
-    expect(result.longest_ride).toBe(-Infinity)
-    expect(result.highest_elevation).toBe(-Infinity)
-    expect(result.fastest_speed).toBe(-Infinity)
+    expect(result.longest_ride).toBe(0)
+    expect(result.highest_elevation).toBe(0)
+    expect(result.fastest_speed).toBe(0)
   })
 
   it('should exclude all trainer activities', () => {
