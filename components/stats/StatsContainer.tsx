@@ -136,12 +136,23 @@ export function StatsContainer() {
             >
               <ChevronLeft className="w-4 h-4 text-gray-500 dark:text-gray-400" />
             </button>
-            <span className="font-medium text-gray-700 dark:text-gray-300 min-w-[4rem] text-center px-2">
-              {selectedYear === 0 ? t('stats.view_total') : selectedYear}
+            <div className="relative min-w-[4rem] text-center">
+              <select
+                value={selectedYear}
+                onChange={e => setSelectedYear(Number(e.target.value))}
+                className="appearance-none bg-transparent border-none text-gray-700 dark:text-gray-300 font-medium text-center focus:ring-0 cursor-pointer py-1 px-2 w-full hover:bg-gray-200 dark:hover:bg-gray-700 rounded transition-colors"
+                aria-label={t('stats.select_year')}
+              >
+                {years.map(year => (
+                  <option key={year} value={year} className="dark:bg-gray-800 dark:text-gray-300">
+                    {year === 0 ? t('stats.view_total') : year}
+                  </option>
+                ))}
+              </select>
               {isLoading && (
-                <span className="ml-2 inline-block animate-spin rounded-full h-3 w-3 border-b-2 border-orange-500" />
+                <span className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 inline-block animate-spin rounded-full h-3 w-3 border-b-2 border-orange-500" />
               )}
-            </span>
+            </div>
             <button
               onClick={() => handleYearChange('next')}
               className={`p-1 rounded transition-colors ${
