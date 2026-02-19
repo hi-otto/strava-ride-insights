@@ -22,7 +22,11 @@
     "clientId": "ID de cliente",
     "clientSecret": "Secreto de cliente",
     "savedPlaceholder": "Guardado...",
-    "connecting": "Conectando..."
+    "connecting": "Conectando...",
+    "callbackDomainLabel": "Dominio de Callback de Autorización:",
+    "callbackDomainInstruction": "En la configuración de la API de Strava, establece el \"Dominio de Callback de Autorización\" a:",
+    "copy": "Copiar",
+    "copied": "¡Copiado!"
   },
   "home": {
     "title": "Sigue tu trayectoria deportiva",

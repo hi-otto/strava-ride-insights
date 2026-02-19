@@ -22,7 +22,11 @@
     "clientId": "客户 ID",
     "clientSecret": "客户密钥",
     "savedPlaceholder": "已保存...",
-    "connecting": "连接中..."
+    "connecting": "连接中...",
+    "callbackDomainLabel": "授权回调域名：",
+    "callbackDomainInstruction": "在 Strava API 设置中，将“授权回调域名”设置为：",
+    "copy": "复制",
+    "copied": "已复制！"
   },
   "home": {
     "title": "追踪您的骑行旅程",

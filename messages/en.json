@@ -22,7 +22,11 @@
     "clientId": "Client ID",
     "clientSecret": "Client Secret",
     "savedPlaceholder": "Saved...",
-    "connecting": "Connecting..."
+    "connecting": "Connecting...",
+    "callbackDomainLabel": "Authorization Callback Domain:",
+    "callbackDomainInstruction": "In Strava API Settings, set the \"Authorization Callback Domain\" to:",
+    "copy": "Copy",
+    "copied": "Copied!"
   },
   "home": {
     "title": "Track Your Cycling Journey",

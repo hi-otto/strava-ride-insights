@@ -52,6 +52,42 @@ export default function Login() {
             <br />
             <span className="font-semibold block mt-1">{t('login.leaveEmpty')}</span>
             <br />
+            <div className="mt-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-100 dark:border-blue-800">
+              <p className="font-semibold text-blue-800 dark:text-blue-300 mb-1">
+                {t('login.callbackDomainInstruction')}
+              </p>
+              <div className="flex items-center gap-2 mt-2">
+                <code
+                  className="flex-1 p-2 bg-white dark:bg-black rounded border border-gray-200 dark:border-gray-700 font-mono text-center select-all text-sm truncate"
+                  id="domain-code"
+                >
+                  {typeof window !== 'undefined'
+                    ? window.location.hostname
+                    : process.env.NEXT_PUBLIC_BASE_URL?.replace(/^https?:\/\//, '').split(':')[0] ||
+                      '...'}
+                </code>
+                <button
+                  onClick={() => {
+                    const domain = document.getElementById('domain-code')?.innerText || ''
+                    navigator.clipboard.writeText(domain)
+                    const btn = document.getElementById('copy-btn')
+                    if (btn) {
+                      const originalText = btn.innerText
+                      btn.innerText = t('login.copied')
+                      setTimeout(() => {
+                        btn.innerText = originalText
+                      }, 2000)
+                    }
+                  }}
+                  className="px-3 py-2 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 rounded text-xs font-medium transition-colors"
+                  id="copy-btn"
+                  type="button"
+                >
+                  {t('login.copy')}
+                </button>
+              </div>
+            </div>
+            <br />
             <a
               href="https://www.strava.com/settings/api"
               target="_blank"
