@@ -22,7 +22,7 @@
     "dayjs": "^1.11.20",
     "html2canvas": "^1.4.1",
     "leaflet": "^1.9.4",
-    "lucide-react": "^1.7.0",
+    "lucide-react": "^1.8.0",
     "next": "16.2.3",
     "next-intl": "^4.9.0",
     "react": "^19.2.5",
