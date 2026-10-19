@@ -52,7 +52,7 @@
     "postcss": "^8",
     "prettier": "^3.9.10",
     "tailwindcss": "^4.3.3",
-    "ts-jest": "^29.4.14",
+    "ts-jest": "^29.4.15",
     "typescript": "^7"
   }
 }
