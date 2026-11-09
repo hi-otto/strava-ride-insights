@@ -18,7 +18,7 @@
     "@mapbox/polyline": "^1.2.1",
     "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
-    "d3": "^7.9.0",
+    "d3": "^7.9.2",
     "dayjs": "^1.11.23",
     "html2canvas": "^1.4.1",
     "leaflet": "^1.9.4",
